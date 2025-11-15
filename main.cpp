@@ -3,15 +3,15 @@
 #include <string>
 #include <iomanip>
 
-// учетные записи
+// ГіГ·ГҐГІГ­Г»ГҐ Г§Г ГЇГЁГ±ГЁ
 const size_t userSize = 2;
-std::string userStatus[3]{ "Супер Администратор", "Администратор", "Сотрудник" };
+std::string userStatus[3]{ "Г‘ГіГЇГҐГ° ГЂГ¤Г¬ГЁГ­ГЁГ±ГІГ°Г ГІГ®Г°", "ГЂГ¤Г¬ГЁГ­ГЁГ±ГІГ°Г ГІГ®Г°", "Г‘Г®ГІГ°ГіГ¤Г­ГЁГЄ" };
 std::string* loginArr = new std::string[userSize]{ "admin","user" };
 std::string* passArr = new std::string[userSize]{ "admin","user" };
 std::string* statusArr = new std::string[userSize]{ userStatus[0],userStatus[2] };
 std::string currentStatus;
 //
-// склад
+// Г±ГЄГ«Г Г¤
 size_t storageSize = 0;
 bool staticStorageCreated = false;
 
@@ -32,7 +32,7 @@ void AddNewItem();
 template <typename Arr>
 void FillArray(Arr* dynamicArr, Arr* staticArr, size_t size);
 //
-// служебные
+// Г±Г«ГіГ¦ГҐГЎГ­Г»ГҐ
 void Start();
 bool Login();
 void ShowSuperAdminMenu();
@@ -63,7 +63,7 @@ void CreateStorage()
 	int id[staticSize]{ 1,2,3,4,5,6,7,8,9,10 };
 	std::string name[staticSize]
 	{
-		"Glock 19", "Smith & Wesson 686", "АК-47",
+		"Glock 19", "Smith & Wesson 686", "ГЂГЉ-47",
 		"Winchester Model 700", "Remington 870",
 		"Franchi Affinity", "Marlin 1895",
 		"Ruger 10/20", "Remington 700",
@@ -92,8 +92,8 @@ void ShowStorage(int mode)
 
 	if (mode == 0)
 	{
-		std::cout << "ID\t" << std::left << std::setw(25) << "название товара\t\t" <<
-			"Цена\t" << "Кол-во\n";
+		std::cout << "ID\t" << std::left << std::setw(25) << "Г­Г Г§ГўГ Г­ГЁГҐ ГІГ®ГўГ Г°Г \t\t" <<
+			"Г–ГҐГ­Г \t" << "ГЉГ®Г«-ГўГ®\n";
 
 		for (size_t i = 0; i < storageSize; i++)
 		{
@@ -105,8 +105,8 @@ void ShowStorage(int mode)
 	}
 	else if (mode == 1)
 	{
-		std::cout << "ID\t" << std::left << std::setw(25) << "название товара\t\t" <<
-			"Кол-во\n";
+		std::cout << "ID\t" << std::left << std::setw(25) << "Г­Г Г§ГўГ Г­ГЁГҐ ГІГ®ГўГ Г°Г \t\t" <<
+			"ГЉГ®Г«-ГўГ®\n";
 
 		for (size_t i = 0; i < storageSize; i++)
 		{
@@ -116,8 +116,8 @@ void ShowStorage(int mode)
 	}
 	else if (mode == 2)
 	{
-		std::cout << "ID\t" << std::left << std::setw(25) << "название товара\t\t" <<
-			"Цена\n";
+		std::cout << "ID\t" << std::left << std::setw(25) << "Г­Г Г§ГўГ Г­ГЁГҐ ГІГ®ГўГ Г°Г \t\t" <<
+			"Г–ГҐГ­Г \n";
 
 		for (size_t i = 0; i < storageSize; i++)
 		{
@@ -142,15 +142,15 @@ void AddStorageItem()
 		system("cls");
 		ShowStorage(1);
 
-		std::cout << "Введите ID товара или \"exit\" для выхода: ";
+		std::cout << "Г‚ГўГҐГ¤ГЁГІГҐ ID ГІГ®ГўГ Г°Г  ГЁГ«ГЁ \"exit\" Г¤Г«Гї ГўГ»ГµГ®Г¤Г : ";
 		GetLine(chooseId);
 		if (chooseId == "exit")
 		{
-			std::cout << "Отмена операции пополнения товара\n";
+			std::cout << "ГЋГІГ¬ГҐГ­Г  Г®ГЇГҐГ°Г Г¶ГЁГЁ ГЇГ®ГЇГ®Г«Г­ГҐГ­ГЁГї ГІГ®ГўГ Г°Г \n";
 			Sleep(1500);
 			break;
 		}
-		std::cout << "Введите кол-во для его пополнения: ";
+		std::cout << "Г‚ГўГҐГ¤ГЁГІГҐ ГЄГ®Г«-ГўГ® Г¤Г«Гї ГҐГЈГ® ГЇГ®ГЇГ®Г«Г­ГҐГ­ГЁГї: ";
 		GetLine(chooseCount);
 
 
@@ -161,26 +161,26 @@ void AddStorageItem()
 
 			if (id < 0 || id > storageSize - 1 || count < 0 || count > 50)
 			{
-				std::cout << "Некорректный id или кол-во\nМаксимальное кол-во 50\n\n";
+				std::cout << "ГЌГҐГЄГ®Г°Г°ГҐГЄГІГ­Г»Г© id ГЁГ«ГЁ ГЄГ®Г«-ГўГ®\nГЊГ ГЄГ±ГЁГ¬Г Г«ГјГ­Г®ГҐ ГЄГ®Г«-ГўГ® 50\n\n";
 				Sleep(1500);
 			}
 			else
 			{
 				std::cout << std::left << std::setw(25) << nameArr[id] <<
 					"\t" << countArr[id] << " --> " << countArr[id] + count << "\n\n";
-				std::cout << "Подтвердить?\n1 - Да\n2 - Нет\nВвод: ";
+				std::cout << "ГЏГ®Г¤ГІГўГҐГ°Г¤ГЁГІГј?\n1 - Г„Г \n2 - ГЌГҐГІ\nГ‚ГўГ®Г¤: ";
 				GetLine(choose);
 				if (choose == "1")
 				{
 					countArr[id] += count;
-					std::cout << "Товар успешно пополнен\n\n";
+					std::cout << "Г’Г®ГўГ Г° ГіГ±ГЇГҐГёГ­Г® ГЇГ®ГЇГ®Г«Г­ГҐГ­\n\n";
 					Sleep(1500);
 					system("cls");
 					break;
 				}
 				else if (choose == "2")
 				{
-					std::cout << "Отмена пополнения товара\n";
+					std::cout << "ГЋГІГ¬ГҐГ­Г  ГЇГ®ГЇГ®Г«Г­ГҐГ­ГЁГї ГІГ®ГўГ Г°Г \n";
 					Sleep(1500);
 				}
 				else
@@ -202,15 +202,15 @@ void RemoveStorageItem()
 		system("cls");
 		ShowStorage(1);
 
-		std::cout << "Введите ID товара или \"exit\" для выхода: ";
+		std::cout << "Г‚ГўГҐГ¤ГЁГІГҐ ID ГІГ®ГўГ Г°Г  ГЁГ«ГЁ \"exit\" Г¤Г«Гї ГўГ»ГµГ®Г¤Г : ";
 		GetLine(chooseId);
 		if (chooseId == "exit")
 		{
-			std::cout << "Отмена операции списания товара\n";
+			std::cout << "ГЋГІГ¬ГҐГ­Г  Г®ГЇГҐГ°Г Г¶ГЁГЁ Г±ГЇГЁГ±Г Г­ГЁГї ГІГ®ГўГ Г°Г \n";
 			Sleep(1500);
 			break;
 		}
-		std::cout << "Введите кол-во для его списания: ";
+		std::cout << "Г‚ГўГҐГ¤ГЁГІГҐ ГЄГ®Г«-ГўГ® Г¤Г«Гї ГҐГЈГ® Г±ГЇГЁГ±Г Г­ГЁГї: ";
 		GetLine(chooseCount);
 
 
@@ -221,26 +221,26 @@ void RemoveStorageItem()
 
 			if (id < 0 || id > storageSize - 1 || count < 0 || count > countArr[id])
 			{
-				std::cout << "Некорректный id или кол-во\n";
+				std::cout << "ГЌГҐГЄГ®Г°Г°ГҐГЄГІГ­Г»Г© id ГЁГ«ГЁ ГЄГ®Г«-ГўГ®\n";
 				Sleep(1500);
 			}
 			else
 			{
 				std::cout << std::left << std::setw(25) << nameArr[id] <<
 					"\t" << countArr[id] << " --> " << countArr[id] - count << "\n\n";
-				std::cout << "Подтвердить?\n1 - Да\n2 - Нет\nВвод: ";
+				std::cout << "ГЏГ®Г¤ГІГўГҐГ°Г¤ГЁГІГј?\n1 - Г„Г \n2 - ГЌГҐГІ\nГ‚ГўГ®Г¤: ";
 				GetLine(choose);
 				if (choose == "1")
 				{
 					countArr[id] -= count;
-					std::cout << "Товар успешно списан\n\n";
+					std::cout << "Г’Г®ГўГ Г° ГіГ±ГЇГҐГёГ­Г® Г±ГЇГЁГ±Г Г­\n\n";
 					Sleep(1500);
 					system("cls");
 					break;
 				}
 				else if (choose == "2")
 				{
-					std::cout << "Отмена списания товара\n";
+					std::cout << "ГЋГІГ¬ГҐГ­Г  Г±ГЇГЁГ±Г Г­ГЁГї ГІГ®ГўГ Г°Г \n";
 					Sleep(1500);
 				}
 				else
@@ -262,15 +262,15 @@ void ChangePrice()
 		system("cls");
 		ShowStorage(2);
 
-		std::cout << "Введите ID товара или \"exit\" для выхода: ";
+		std::cout << "Г‚ГўГҐГ¤ГЁГІГҐ ID ГІГ®ГўГ Г°Г  ГЁГ«ГЁ \"exit\" Г¤Г«Гї ГўГ»ГµГ®Г¤Г : ";
 		GetLine(chooseId);
 		if (chooseId == "exit")
 		{
-			std::cout << "Отмена операции изменение цены\n";
+			std::cout << "ГЋГІГ¬ГҐГ­Г  Г®ГЇГҐГ°Г Г¶ГЁГЁ ГЁГ§Г¬ГҐГ­ГҐГ­ГЁГҐ Г¶ГҐГ­Г»\n";
 			Sleep(1500);
 			break;
 		}
-		std::cout << "Введите новую цену: ";
+		std::cout << "Г‚ГўГҐГ¤ГЁГІГҐ Г­Г®ГўГіГѕ Г¶ГҐГ­Гі: ";
 		GetLine(newPrice);
 
 
@@ -281,26 +281,26 @@ void ChangePrice()
 
 			if (id < 0 || id > storageSize || Price < 0.0 || Price > 500000)
 			{
-				std::cout << "Некорректный id или цена\nМаксимальная цена 500000\n\n";
+				std::cout << "ГЌГҐГЄГ®Г°Г°ГҐГЄГІГ­Г»Г© id ГЁГ«ГЁ Г¶ГҐГ­Г \nГЊГ ГЄГ±ГЁГ¬Г Г«ГјГ­Г Гї Г¶ГҐГ­Г  500000\n\n";
 				Sleep(1500);
 			}
 			else
 			{
 				std::cout << std::left << std::setw(25) << nameArr[id] <<
 					"\t" << priceArr[id] << " --> " << Price << "\n\n";
-				std::cout << "Подтвердить?\n1 - Да\n2 - Нет\nВвод: ";
+				std::cout << "ГЏГ®Г¤ГІГўГҐГ°Г¤ГЁГІГј?\n1 - Г„Г \n2 - ГЌГҐГІ\nГ‚ГўГ®Г¤: ";
 				GetLine(choose);
 				if (choose == "1")
 				{
 					priceArr[id] = Price;
-					std::cout << "Цена успешна изменена\n\n";
+					std::cout << "Г–ГҐГ­Г  ГіГ±ГЇГҐГёГ­Г  ГЁГ§Г¬ГҐГ­ГҐГ­Г \n\n";
 					Sleep(1500);
 					system("cls");
 					break;
 				}
 				else if (choose == "2")
 				{
-					std::cout << "Отмена изменение цены\n";
+					std::cout << "ГЋГІГ¬ГҐГ­Г  ГЁГ§Г¬ГҐГ­ГҐГ­ГЁГҐ Г¶ГҐГ­Г»\n";
 					Sleep(1500);
 				}
 				else
@@ -321,11 +321,11 @@ void ChangeStorage()
 	while (true)
 	{
 		system("cls");
-		std::cout << "1 - Добавить новый товар\n";
-		std::cout << "2 - Изменить имя товара\n";
-		std::cout << "3 - Удалить товар\n";
-		std::cout << "0 - выйти из редактора\n";
-		std::cout << "Ввод: ";
+		std::cout << "1 - Г„Г®ГЎГ ГўГЁГІГј Г­Г®ГўГ»Г© ГІГ®ГўГ Г°\n";
+		std::cout << "2 - Г€Г§Г¬ГҐГ­ГЁГІГј ГЁГ¬Гї ГІГ®ГўГ Г°Г \n";
+		std::cout << "3 - Г“Г¤Г Г«ГЁГІГј ГІГ®ГўГ Г°\n";
+		std::cout << "0 - ГўГ»Г©ГІГЁ ГЁГ§ Г°ГҐГ¤Г ГЄГІГ®Г°Г \n";
+		std::cout << "Г‚ГўГ®Г¤: ";
 		GetLine(choose);
 
 		if (choose == "1")
@@ -364,12 +364,12 @@ void AddNewItem()
 		while (true)
 		{
 			system("cls");
-			std::cout << "\tДобавление нового товара!\n\nВедите \"exit\" для прекращений операции\n";
-			std::cout << "Введите название нового товара: ";
+			std::cout << "\tГ„Г®ГЎГ ГўГ«ГҐГ­ГЁГҐ Г­Г®ГўГ®ГЈГ® ГІГ®ГўГ Г°Г !\n\nГ‚ГҐГ¤ГЁГІГҐ \"exit\" Г¤Г«Гї ГЇГ°ГҐГЄГ°Г Г№ГҐГ­ГЁГ© Г®ГЇГҐГ°Г Г¶ГЁГЁ\n";
+			std::cout << "Г‚ГўГҐГ¤ГЁГІГҐ Г­Г Г§ГўГ Г­ГЁГҐ Г­Г®ГўГ®ГЈГ® ГІГ®ГўГ Г°Г : ";
 			GetLine(newName);
 			if (newName == "exit")
 			{
-				std::cout << "Операция добавления товара прервана!";
+				std::cout << "ГЋГЇГҐГ°Г Г¶ГЁГї Г¤Г®ГЎГ ГўГ«ГҐГ­ГЁГї ГІГ®ГўГ Г°Г  ГЇГ°ГҐГ°ГўГ Г­Г !";
 				Sleep(1500);
 				exit = false;
 				break;
@@ -377,7 +377,7 @@ void AddNewItem()
 			
 			if (newName.size() <= 0 || newName.size() >= 60)
 			{
-				std::cout << "Ошибка имени. Максимальная длина 60 символов\n";
+				std::cout << "ГЋГёГЁГЎГЄГ  ГЁГ¬ГҐГ­ГЁ. ГЊГ ГЄГ±ГЁГ¬Г Г«ГјГ­Г Гї Г¤Г«ГЁГ­Г  60 Г±ГЁГ¬ГўГ®Г«Г®Гў\n";
 			}
 			else
 			{
@@ -388,12 +388,12 @@ void AddNewItem()
 		while (exit)
 		{
 			system("cls");
-			std::cout << "\tДобавление нового товара!\n\nВедите \"exit\" для прекращений операции\n";
-			std::cout << "Введите количество нового товара: ";
+			std::cout << "\tГ„Г®ГЎГ ГўГ«ГҐГ­ГЁГҐ Г­Г®ГўГ®ГЈГ® ГІГ®ГўГ Г°Г !\n\nГ‚ГҐГ¤ГЁГІГҐ \"exit\" Г¤Г«Гї ГЇГ°ГҐГЄГ°Г Г№ГҐГ­ГЁГ© Г®ГЇГҐГ°Г Г¶ГЁГЁ\n";
+			std::cout << "Г‚ГўГҐГ¤ГЁГІГҐ ГЄГ®Г«ГЁГ·ГҐГ±ГІГўГ® Г­Г®ГўГ®ГЈГ® ГІГ®ГўГ Г°Г : ";
 			GetLine(newCount);
 			if (newCount == "exit")
 			{
-				std::cout << "Операция добавления товара прервана!";
+				std::cout << "ГЋГЇГҐГ°Г Г¶ГЁГї Г¤Г®ГЎГ ГўГ«ГҐГ­ГЁГї ГІГ®ГўГ Г°Г  ГЇГ°ГҐГ°ГўГ Г­Г !";
 				Sleep(1500);
 				exit = false;
 				break;
@@ -404,7 +404,7 @@ void AddNewItem()
 				count = std::stoi(newCount);
 				if (count > 50)
 				{
-					std::cout << "Ошибка максимального размера товара. Не более 50 ед.\n";
+					std::cout << "ГЋГёГЁГЎГЄГ  Г¬Г ГЄГ±ГЁГ¬Г Г«ГјГ­Г®ГЈГ® Г°Г Г§Г¬ГҐГ°Г  ГІГ®ГўГ Г°Г . ГЌГҐ ГЎГ®Г«ГҐГҐ 50 ГҐГ¤.\n";
 					Sleep(1500);
 				}
 				else
@@ -417,12 +417,12 @@ void AddNewItem()
 		while (exit)
 		{
 			system("cls");
-			std::cout << "\tДобавление нового товара!\n\nВедите \"exit\" для прекращений операции\n";
-			std::cout << "Введите цену нового товара: ";
+			std::cout << "\tГ„Г®ГЎГ ГўГ«ГҐГ­ГЁГҐ Г­Г®ГўГ®ГЈГ® ГІГ®ГўГ Г°Г !\n\nГ‚ГҐГ¤ГЁГІГҐ \"exit\" Г¤Г«Гї ГЇГ°ГҐГЄГ°Г Г№ГҐГ­ГЁГ© Г®ГЇГҐГ°Г Г¶ГЁГЁ\n";
+			std::cout << "Г‚ГўГҐГ¤ГЁГІГҐ Г¶ГҐГ­Гі Г­Г®ГўГ®ГЈГ® ГІГ®ГўГ Г°Г : ";
 			GetLine(newPrice);
 			if (newPrice == "exit")
 			{
-				std::cout << "Операция добавления товара прервана!";
+				std::cout << "ГЋГЇГҐГ°Г Г¶ГЁГї Г¤Г®ГЎГ ГўГ«ГҐГ­ГЁГї ГІГ®ГўГ Г°Г  ГЇГ°ГҐГ°ГўГ Г­Г !";
 				Sleep(1500);
 				exit = false;
 				break;
@@ -433,7 +433,7 @@ void AddNewItem()
 				price = std::stoi(newPrice);
 				if (price > 499999.9)
 				{
-					std::cout << "Ошибка максимальной цены товара. Не более 500000 руб.\n";
+					std::cout << "ГЋГёГЁГЎГЄГ  Г¬Г ГЄГ±ГЁГ¬Г Г«ГјГ­Г®Г© Г¶ГҐГ­Г» ГІГ®ГўГ Г°Г . ГЌГҐ ГЎГ®Г«ГҐГҐ 500000 Г°ГіГЎ.\n";
 					Sleep(1500);
 				}
 				else
@@ -443,14 +443,12 @@ void AddNewItem()
 			}
 		}
 
-		system("pause");
-
 		while (exit)
 		{
-			std::cout << "Новый товар: " << newName << "\n";
-			std::cout << "кол-во: " << count << "\n";
-			std::cout << "цена: " << price << "\n";
-			std::cout << "Подтвердить?\n1 - Да\n2 - Нет\nВвод: ";
+			std::cout << "ГЌГ®ГўГ»Г© ГІГ®ГўГ Г°: " << newName << "\n";
+			std::cout << "ГЄГ®Г«-ГўГ®: " << count << "\n";
+			std::cout << "Г¶ГҐГ­Г : " << price << "\n";
+			std::cout << "ГЏГ®Г¤ГІГўГҐГ°Г¤ГЁГІГј?\n1 - Г„Г \n2 - ГЌГҐГІ\nГ‚ГўГ®Г¤: ";
 			GetLine(choose);
 			if (choose == "1")
 			{
@@ -476,10 +474,11 @@ void AddNewItem()
 				std::swap(priceArr, priceArrTemp);
 
 				delete[]idArrTemp, nameArrTemp, countArrTemp, priceArrTemp;
+				exit = false;
 			}
 			else if (choose == "2")
 			{
-				std::cout << "Отмена";
+				std::cout << "ГЋГІГ¬ГҐГ­Г ";
 				Sleep(1500);
 			}
 			else
@@ -499,14 +498,14 @@ void AddNewItem()
 void Start()
 {
 	std::string choose;
-	std::cout << "\n\n\n\t\tУбитьЛегко\n\n\n";
+	std::cout << "\n\n\n\t\tГ“ГЎГЁГІГјГ‹ГҐГЈГЄГ®\n\n\n";
 	if (Login())
 	{
 		if (currentStatus == userStatus[0])
 		{
 			while (true)
 			{
-				std::cout << "Выберте склад\n1 - Готовый\n2 - Создать новый\nВвод: ";
+				std::cout << "Г‚Г»ГЎГҐГ°ГІГҐ Г±ГЄГ«Г Г¤\n1 - ГѓГ®ГІГ®ГўГ»Г©\n2 - Г‘Г®Г§Г¤Г ГІГј Г­Г®ГўГ»Г©\nГ‚ГўГ®Г¤: ";
 				GetLine(choose);
 				if (choose == "1")
 				{
@@ -538,7 +537,7 @@ void Start()
 	else
 	{
 		system("cls");
-		std::cout << "Завершение работы магазина\n\n";
+		std::cout << "Г‡Г ГўГҐГ°ГёГҐГ­ГЁГҐ Г°Г ГЎГ®ГІГ» Г¬Г ГЈГ Г§ГЁГ­Г \n\n";
 	}
 }
 
@@ -547,9 +546,9 @@ bool Login()
 	std::string login, pass;
 	while (true)
 	{
-		std::cout << "Введите логин: ";
+		std::cout << "Г‚ГўГҐГ¤ГЁГІГҐ Г«Г®ГЈГЁГ­: ";
 		GetLine(login);
-		std::cout << "Введите пароль: ";
+		std::cout << "Г‚ГўГҐГ¤ГЁГІГҐ ГЇГ Г°Г®Г«Гј: ";
 		GetLine(pass);
 
 		if (login == "exit" && pass == "exit")
@@ -563,8 +562,8 @@ bool Login()
 			if (login == loginArr[i] && pass == passArr[i])
 			{
 				system("cls");
-				std::cout << "Пользователь: " << loginArr[i] << " Добро пожаловать!\n";
-				std::cout << "Ваш статус: " << statusArr[i] << "\n\n";
+				std::cout << "ГЏГ®Г«ГјГ§Г®ГўГ ГІГҐГ«Гј: " << loginArr[i] << " Г„Г®ГЎГ°Г® ГЇГ®Г¦Г Г«Г®ГўГ ГІГј!\n";
+				std::cout << "Г‚Г Гё Г±ГІГ ГІГіГ±: " << statusArr[i] << "\n\n";
 				currentStatus = statusArr[i];
 				return true;
 			}
@@ -579,16 +578,16 @@ void ShowSuperAdminMenu()
 
 	while (true)
 	{
-		std::cout << "1 - Начать продажу\n";
-		std::cout << "2 - Показать склад\n";
-		std::cout << "3 - Пополнить склад\n";
-		std::cout << "4 - Списать товар\n";
-		std::cout << "5 - Изменить цену\n";
-		std::cout << "6 - Редактировать склад\n";
-		std::cout << "7 - Редактировать персонал\n";
-		std::cout << "8 - Отчёт о прибыли\n";
-		std::cout << "0 - Закрыть смену\n";
-		std::cout << "Ввод: ";
+		std::cout << "1 - ГЌГ Г·Г ГІГј ГЇГ°Г®Г¤Г Г¦Гі\n";
+		std::cout << "2 - ГЏГ®ГЄГ Г§Г ГІГј Г±ГЄГ«Г Г¤\n";
+		std::cout << "3 - ГЏГ®ГЇГ®Г«Г­ГЁГІГј Г±ГЄГ«Г Г¤\n";
+		std::cout << "4 - Г‘ГЇГЁГ±Г ГІГј ГІГ®ГўГ Г°\n";
+		std::cout << "5 - Г€Г§Г¬ГҐГ­ГЁГІГј Г¶ГҐГ­Гі\n";
+		std::cout << "6 - ГђГҐГ¤Г ГЄГІГЁГ°Г®ГўГ ГІГј Г±ГЄГ«Г Г¤\n";
+		std::cout << "7 - ГђГҐГ¤Г ГЄГІГЁГ°Г®ГўГ ГІГј ГЇГҐГ°Г±Г®Г­Г Г«\n";
+		std::cout << "8 - ГЋГІГ·ВёГІ Г® ГЇГ°ГЁГЎГ»Г«ГЁ\n";
+		std::cout << "0 - Г‡Г ГЄГ°Г»ГІГј Г±Г¬ГҐГ­Гі\n";
+		std::cout << "Г‚ГўГ®Г¤: ";
 		GetLine(choose);
 		if (choose == "1")
 		{
@@ -637,8 +636,8 @@ bool IsNumber(const std::string& str)
 {
 	if (str.size() <= 0 || str.size() >= 10)
 	{
-		std::cout << "Некорректный ввод\n";
-		std::cout << "Ошибка длины числа. От 1 до 9 цифр включительно\n\n";
+		std::cout << "ГЌГҐГЄГ®Г°Г°ГҐГЄГІГ­Г»Г© ГўГўГ®Г¤\n";
+		std::cout << "ГЋГёГЁГЎГЄГ  Г¤Г«ГЁГ­Г» Г·ГЁГ±Г«Г . ГЋГІ 1 Г¤Г® 9 Г¶ГЁГґГ° ГўГЄГ«ГѕГ·ГЁГІГҐГ«ГјГ­Г®\n\n";
 		Sleep(1500);
 		return false;
 	}
@@ -646,8 +645,8 @@ bool IsNumber(const std::string& str)
 	{
 		if (!std::isdigit(str[i]))
 		{
-			std::cout << "Некорректный ввод\n";
-			std::cout << "Введёная данные не являются числом\n\n";
+			std::cout << "ГЌГҐГЄГ®Г°Г°ГҐГЄГІГ­Г»Г© ГўГўГ®Г¤\n";
+			std::cout << "Г‚ГўГҐГ¤ВёГ­Г Гї Г¤Г Г­Г­Г»ГҐ Г­ГҐ ГїГўГ«ГїГѕГІГ±Гї Г·ГЁГ±Г«Г®Г¬\n\n";
 			Sleep(1500);
 			return false;
 		}
@@ -662,7 +661,7 @@ inline void GetLine(std::string& str)
 
 inline void Err(int time)
 {
-	std::cout << "Некорректный ввод\n";
+	std::cout << "ГЌГҐГЄГ®Г°Г°ГҐГЄГІГ­Г»Г© ГўГўГ®Г¤\n";
 	Sleep(time);
 	system("cls");
 }
