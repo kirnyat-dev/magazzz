@@ -431,7 +431,7 @@ void AddNewItem()
 			if (IsNumber(newPrice))
 			{
 				price = std::stoi(newPrice);
-				if (price > 499999.9)
+				if (price > 500000)
 				{
 					std::cout << "Îøèáêà ìàêñèìàëüíîé öåíû òîâàðà. Íå áîëåå 500000 ðóá.\n";
 					Sleep(1500);
