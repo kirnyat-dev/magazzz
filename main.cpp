@@ -1933,3 +1933,4 @@ void FillArray(Arr* dynamicArr, Arr* staticArr, size_t size)
 		dynamicArr[i] = staticArr[i];
 	}
 }
+
