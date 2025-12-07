@@ -62,6 +62,9 @@ void CheckArrAppend();
 void PrintCheck(double& totalSum);
 void StorageReturner();
 
+double ApplyBulkDiscount(double currentTotal, unsigned int totalCount);
+double ApplyHighValueDiscount(double currentTotal);
+
 // служебные
 void Start();
 bool Login();
@@ -562,7 +565,6 @@ void CreateStorage(int mode)
 		delete[] nameArr;
 		delete[] countArr;
 		delete[] priceArr;
-
 		idArr = nullptr;
 		nameArr = nullptr;
 		countArr = nullptr;
@@ -1080,8 +1082,7 @@ void ChangeName()
 			}
 			else
 			{
-				std::cout << std::left << std::setw(25) <<
-					nameArr[id] << " --> " << newName << "\n\n";
+				std::cout << "\n\n";
 				std::cout << "Подтвердить?\n1 - Да\n2 - Нет\nВвод: ";
 				GetLine(choose);
 				if (choose == "1")
@@ -1184,11 +1185,41 @@ void DeleteItem()
 	}
 }
 
+double ApplyBulkDiscount(double currentTotal, unsigned int totalCount)
+{
+	const unsigned int MIN_COUNT = 5;
+	const double DISCOUNT_RATE = 0.10;
+
+	if (totalCount >= MIN_COUNT)
+	{
+		double discountAmount = currentTotal * DISCOUNT_RATE;
+		std::cout << "Применена скидка! Скидка составила: " << std::fixed << std::setprecision(2) << discountAmount << " руб.\n";
+		return currentTotal - discountAmount;
+	}
+	return currentTotal;
+}
+
+double ApplyHighValueDiscount(double currentTotal)
+{
+	const double MIN_VALUE = 500000.0;
+	const double DISCOUNT_RATE = 0.07;
+
+	if (currentTotal >= MIN_VALUE)
+	{
+		double discountAmount = currentTotal * DISCOUNT_RATE;
+		std::cout << "\nПрименена скидка! Крупная покупка (7%)! " << "(Сумма чека: " << std::fixed << std::setprecision(2) << currentTotal << " руб.)\n";
+		std::cout << " Скидка составила: " << std::fixed << std::setprecision(2) << discountAmount << " руб.\n";
+		return currentTotal - discountAmount;
+	}
+	return currentTotal;
+}
+
 void Selling()
 {
 	std::string chooseId, chooseCount, choose, chooseCash;
 	unsigned int id = 0, count = 0, index = (unsigned int)-1;
 	double totalSum = 0.0, money = 0.0;
+	unsigned int totalCount = 0;
 	bool isFirst = false;
 
 	checkSize = 0;
@@ -1228,6 +1259,11 @@ void Selling()
 			}
 
 			system("cls");
+
+			double initialTotalSum = totalSum;
+			totalSum = ApplyHighValueDiscount(totalSum);
+			totalSum = ApplyBulkDiscount(totalSum, totalCount);
+
 			PrintCheck(totalSum);
 
 			std::cout << "\nПодтвердите покупку?\n1 - Да\n2 - Добавить ещё товар\n3 - Отмена\nВвод: ";
@@ -1350,6 +1386,7 @@ void Selling()
 				}
 
 				totalSum = 0.0;
+				totalCount = 0;
 				isFirst = false;
 
 				std::cout << "Покупка завершена успешно!\n";
@@ -1368,6 +1405,7 @@ void Selling()
 				StorageReturner();
 
 				totalSum = 0.0;
+				totalCount = 0;
 				isFirst = false;
 
 				Sleep(1500);
@@ -1378,7 +1416,9 @@ void Selling()
 			{
 				Err();
 				system("cls");
-				PrintCheck(totalSum);
+				double tempTotalSum = totalSum;
+				PrintCheck(tempTotalSum);
+				std::cout << "\nФинальная сумма со скидками: " << std::fixed << std::setprecision(2) << tempTotalSum << " рублей\n";
 				continue;
 			}
 		}
@@ -1444,6 +1484,7 @@ void Selling()
 		totalPriceArrCheck[index] = count * priceArr[id];
 		countArr[id] -= count;
 		totalSum += totalPriceArrCheck[index];
+		totalCount += count;
 
 		std::cout << "\nТовар добавлен в чек\n\n";
 		isFirst = true;
