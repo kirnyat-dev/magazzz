@@ -26,10 +26,10 @@ void DeleteUser();
 size_t storageSize = 0;
 bool staticStorageCreated = false;
 
-int* idArr;
-std::string* nameArr;
-unsigned int* countArr;
-double* priceArr;
+int* idArr = nullptr;
+std::string* nameArr = nullptr;
+unsigned int* countArr = nullptr;
+double* priceArr = nullptr;
 
 void CreateStorage(int mode = 0);
 void ShowStorage(int mode = 0);
@@ -47,11 +47,11 @@ void FillArray(Arr* dynamicArr, Arr* staticArr, size_t size);
 
 // Продажи
 size_t checkSize = 0;
-int* idArrCheck;
-std::string* nameArrCheck;
-unsigned int* countArrCheck;
-double* priceArrCheck;
-double* totalPriceArrCheck;
+int* idArrCheck = nullptr;
+std::string* nameArrCheck = nullptr;
+unsigned int* countArrCheck = nullptr;
+double* priceArrCheck = nullptr;
+double* totalPriceArrCheck = nullptr;
 
 double cash = 30000 + rand() % 70000;
 double cashIncome = 0.0;
@@ -83,6 +83,7 @@ int main()
 	SetConsoleOutputCP(1251);
 
 	Start();
+
 	delete[]loginArr;
 	delete[]passArr;
 	delete[]statusArr;
@@ -356,7 +357,7 @@ void ChangePass()
 		else if (IsNumber(choose))
 		{
 			userNumber = std::stoi(choose);
-			size_t userIndex = -1;
+			size_t userIndex = (size_t)-1;
 
 			for (size_t i = 0; i < userSize; ++i)
 			{
@@ -555,6 +556,20 @@ void DeleteUser()
 
 void CreateStorage(int mode)
 {
+	if (staticStorageCreated)
+	{
+		delete[] idArr;
+		delete[] nameArr;
+		delete[] countArr;
+		delete[] priceArr;
+
+		idArr = nullptr;
+		nameArr = nullptr;
+		countArr = nullptr;
+		priceArr = nullptr;
+		staticStorageCreated = false;
+	}
+
 	if (mode == 0)
 	{
 		const int staticSize = 10;
@@ -571,33 +586,32 @@ void CreateStorage(int mode)
 		unsigned int count[staticSize]{ 25,15,20,8,20,8,6,30,5,6 };
 		double price[staticSize]{ 75000.0,135000.0,90000.0,125000.0,80000.0,95000.0,155000.0,55000.0,210000.0,120000.0 };
 
-		if (staticStorageCreated)
-		{
-			delete[]idArr;
-			delete[]nameArr;
-			delete[]countArr;
-			delete[]priceArr;
-			staticStorageCreated = false;
-		}
-
 		storageSize = staticSize;
 
 		idArr = new int[storageSize];
 		nameArr = new std::string[storageSize];
 		countArr = new unsigned int[storageSize];
 		priceArr = new double[storageSize];
-		staticStorageCreated = true;
 
 		FillArray(idArr, id, storageSize);
 		FillArray(priceArr, price, storageSize);
 		FillArray(countArr, count, storageSize);
 		FillArray(nameArr, name, storageSize);
+
+		staticStorageCreated = true;
 	}
 	else if (mode == 1)
 	{
-		std::string choose;
-		std::cout << "Создание склада с нуля\n";
-		Sleep(2000);
+		storageSize = 0;
+		idArr = new int[0];
+		nameArr = new std::string[0];
+		countArr = new unsigned int[0];
+		priceArr = new double[0];
+
+		staticStorageCreated = true;
+
+		std::cout << "Создан пустой склад. Используйте меню для добавления товаров.\n";
+		Sleep(1500);
 	}
 }
 
@@ -1194,6 +1208,13 @@ void Selling()
 	{
 		ShowStorage(0);
 
+		if (storageSize == 0)
+		{
+			std::cout << "Склад пуст. Невозможно начать продажу.\n";
+			Sleep(2000);
+			return;
+		}
+
 		std::cout << "\nВведите ID товара для покупки или \"exit\" для завершения покупок: ";
 		GetLine(chooseId);
 
@@ -1267,7 +1288,7 @@ void Selling()
 
 								if (currentId > 0)
 								{
-									awardArr[currentId] += totalSum * 0.01;
+									awardArr[currentId - 1] += totalSum * 0.01;
 								}
 
 								Sleep(1800);
@@ -1306,7 +1327,7 @@ void Selling()
 
 							if (currentId > 0)
 							{
-								awardArr[currentId] += totalSum * 0.01;
+								awardArr[currentId - 1] += totalSum * 0.01;
 							}
 
 							Sleep(2500);
@@ -1517,32 +1538,28 @@ void Start()
 	{
 		if (Login())
 		{
-			if (currentStatus == userStatus[0])
+			system("cls");
+
+			if (currentStatus == userStatus[0] && staticStorageCreated == false)
 			{
 				while (true)
 				{
-					std::cout << "Выберте склад\n1 - Готовый\n2 - Создать новый\nВвод: ";
+					std::cout << "Выберите склад для начала работы:\n";
+					std::cout << "1 - Готовый\n";
+					std::cout << "2 - Создать новый склад\n";
+					std::cout << "Ввод: ";
 					GetLine(choose);
+
 					if (choose == "1")
 					{
-						if (staticStorageCreated == false)
-						{
-							CreateStorage();
-						}
+						CreateStorage(0);
 						system("cls");
-						ShowSuperAdminMenu();
-
 						break;
 					}
-					if (choose == "2")
+					else if (choose == "2")
 					{
-						if (staticStorageCreated == false)
-						{
-							CreateStorage(1);
-						}
+						CreateStorage(1);
 						system("cls");
-						ShowSuperAdminMenu();
-
 						break;
 					}
 					else
@@ -1551,22 +1568,25 @@ void Start()
 					}
 				}
 			}
-			else if (currentStatus == userStatus[1])
+			else if (currentStatus == userStatus[1] || currentStatus == userStatus[2])
 			{
 				if (staticStorageCreated == false)
 				{
-					CreateStorage();
+					CreateStorage(0);
 				}
-				system("cls");
+			}
+
+
+			if (currentStatus == userStatus[0])
+			{
+				ShowSuperAdminMenu();
+			}
+			else if (currentStatus == userStatus[1])
+			{
 				ShowAdminMenu();
 			}
 			else if (currentStatus == userStatus[2])
 			{
-				if (staticStorageCreated == false)
-				{
-					CreateStorage();
-				}
-				system("cls");
 				ShowUserMenu();
 			}
 		}
@@ -1915,7 +1935,7 @@ void ShowIncome()
 	std::cout << "Наличный расчёт: " << std::fixed << std::setprecision(2) << cashIncome << "\n";
 	std::cout << "Безналичный расчёт: " << std::fixed << std::setprecision(2) << bankIncome << "\n";
 	std::cout << "Итого: " << std::fixed << std::setprecision(2) << cashIncome + bankIncome << "\n";
-	std::cout << "Сумма ваших продаж: " << std::fixed << std::setprecision(2) << awardArr[currentId] << "\n";
+	std::cout << "Сумма ваших продаж: " << std::fixed << std::setprecision(2) << awardArr[currentId - 1] << "\n";
 	system("pause");
 	system("cls");
 }
