@@ -53,8 +53,8 @@ inline void Err(int time = 1500);
 
 int main()
 {
-	SetConsoleCP(1251);
-	SetConsoleOutputCP(1251);
+	SetConsoleCP(65001);
+	SetConsoleOutputCP(65001);
 
 	Start();
 	delete[]loginArr, passArr, statusArr;
@@ -245,13 +245,13 @@ void ShowUsers()
 {
 	system("cls");
 	
-	std::cout << "№\t" << std::left << std::setw(10) << "Логин\t" <<
-		"Пароль\t" << "Статус\n";
+	std::cout << "№\t" << std::left << std::setw(20) << "Логин\t" 
+		<< std::left << std::setw(30) << "Пароль\t" << "Статус\n";
 
 	for (size_t i = 1; i < userSize; i++)
 	{
-		std::cout << i << '\t' << std::left << std::setw(12) << loginArr[i]
-			<< passArr[i] << "\t" << statusArr[i] << "\n";
+		std::cout << i << '\t' << std::left << std::setw(20) << loginArr[i]
+			<< std::left << std::setw(30) << passArr[i] << statusArr[i] << "\n";
 	}
 	system("pause");
 	system("cls");
@@ -264,11 +264,11 @@ void CreateStorage()
 	int id[staticSize]{ 1,2,3,4,5,6,7,8,9,10 };
 	std::string name[staticSize]
 	{
-		"Glock 19", "Smith & Wesson 686", "АК-47",
-		"Winchester Model 700", "Remington 870",
-		"Franchi Affinity", "Marlin 1895",
-		"Ruger 10/20", "Remington 700",
-		"Weihrauch HW 100"
+			"Glock 19", "Smith & Wesson 686", "АК-47",
+			"Winchester Model 700", "Remington 870",
+			"Franchi Affinity", "Marlin 1895",
+			"Ruger 10/20", "Remington 700",
+			"Weihrauch HW 100"
 	};
 	unsigned int count[staticSize]{ 25,15,20,8,20,8,6,30,5,6 };
 	double price[staticSize]{ 75000.0,135000.0,90000.0,125000.0,80000.0,95000.0,155000.0,55000.0,210000.0,120000.0 };
@@ -1062,7 +1062,7 @@ bool CheckPass(const std::string& str)
 {
 	if (str.size() < 5 || str.size() > 64)
 	{
-		std::cout << "Недопустимая длина пароля! От 5 до 64\n";
+		std::cout << "Недопустимая длина пароля! От 5 до 30\n";
 		Sleep(1500);
 		return false;
 	}
